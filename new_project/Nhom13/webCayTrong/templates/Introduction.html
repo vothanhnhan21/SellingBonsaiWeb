@@ -1,0 +1,138 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.js' %}"> <!-- Link to JS file -->
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    
+    {% block content %}
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-8 content">
+                <h1> Website Nhóm 13 </h1>
+                <h4>Chào mừng đến với Nhóm 13 trang web về cây cảnh!</h4>
+                <p>
+                    Bạn có phải là một người yêu thích thiên nhiên, 
+                    thích tìm hiểu về các loại cây cỏ và 
+                    muốn mang không gian xanh vào cuộc sống của mình? 
+                    Hãy để Nhóm 13 đồng hành cùng bạn trên hành trình khám phá thế giới cây cảnh 
+                    đầy màu sắc và thú vị!
+                
+                </p>
+                <h4> Tác dụng của cây cảnh</h4>
+                <p>
+                    Cây cảnh không chỉ mang lại vẻ đẹp cho ngôi nhà mà 
+                    còn có nhiều lợi ích về sức khỏe và tâm lý. 
+                    Chúng giúp cải thiện chất lượng không khí, 
+                    giảm căng thẳng và tạo cảm giác thư giãn cho mọi người. 
+                    Với sự phát triển của cuộc sống hiện đại, 
+                    việc đưa thiên nhiên vào không gian sống ngày càng trở 
+                    nên quan trọng hơn bao giờ hết.
+                </p>
+                <h4>Những Gì Bạn Sẽ Tìm Thấy Tại trang web nhóm 13?</h4>
+                <ol>
+                    <li> 
+                        <h4>Bộ Sưu Tập Đa Dạng:</h4>
+                        <p>
+                            Chúng tôi cung cấp một bộ sưu tập phong phú các loại cây cảnh 
+                            từ cây để bàn nhỏ nhắn đến những chậu cây lớn, 
+                            đa dạng về chủng loại và phong cách. 
+                            ất cả đều được chọn lọc kỹ càng từ các nhà vườn uy tín.
+                        </p>
+                    </li>
+                    <li>
+                        <h4>Hướng Dẫn Chăm Sóc:</h4>
+                        <p>
+                            Mỗi loại cây cảnh đều có cách chăm sóc riêng. 
+                            Tại đây, bạn sẽ tìm thấy những bài viết hướng dẫn chi tiết 
+                            về cách tưới nước, bón phân và chăm sóc từng loại cây để 
+                            chúng luôn khỏe mạnh và phát triển tốt nhất.
+                        </p>
+                    </li>
+                    <li>
+                        <h4> Mua Sắm Trực Tuyến: </h4>
+                        <p>
+                        Dễ dàng đặt hàng và nhận cây cảnh ngay tại nhà. 
+                        Chúng tôi đảm bảo chất lượng và dịch vụ giao hàng 
+                        nhanh chóng, giúp bạn nhanh chóng có được những chậu cây yêu thích.
+                        </p>
+                    </li>
+                    <li>
+                        <h4>Chia Sẻ Kinh Nghiệm:</h4>
+                        <p>
+                            Tham gia cộng đồng yêu cây cảnh của chúng tôi! 
+                            Bạn có thể chia sẻ kinh nghiệm, thảo luận và học hỏi từ 
+                            những người cùng sở thích. Chúng tôi khuyến khích mọi 
+                            người cùng nhau tạo ra một không gian xanh hơn.
+                        </p>
+                    </li>
+                </ol>
+                <h4>Khám Phá và Kết Nối</h4>
+                <p>
+                Chúng tôi không chỉ đơn thuần là một cửa hàng cây cảnh; 
+                chúng tôi là nơi để bạn khám phá, học hỏi và kết nối với những người có cùng đam mê. 
+                Hãy theo dõi blog của chúng tôi để cập nhật những thông tin mới nhất về cây cảnh, 
+                xu hướng thiết kế không gian xanh và mẹo chăm sóc cây.
+                </p>
+                <h4>Liên Hệ với Chúng Tôi</h4>
+                <p>
+                Nếu bạn có bất kỳ câu hỏi nào hoặc cần tư vấn, 
+                đừng ngần ngại liên hệ với chúng tôi qua <a>trang liên hệ</a>. 
+                Chúng tôi luôn sẵn lòng hỗ trợ bạn!
+                </p>
+
+                <h4>Cây Cảnh Tươi Xanh </h4>
+                <p>– Mang thiên nhiên đến gần hơn với cuộc sống của bạn!</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .row{
+            justify-content:center;
+
+        }
+        .content{
+            margin:2rem;
+            font-family: 'Times New Roman', Times, serif;
+            color:#333;
+            line-height: 3rem;
+        }
+        .content h1{
+            color:#59c659;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+        .content h4{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .content p{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        ol li::marker {
+            font-size: 2rem;
+        
+        }
+        .content a{
+            cursor: pointer;
+            text-decoration: none;
+            font-style:italic;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+
+</body>
+</html>

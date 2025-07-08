@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-image:url(https://danviet.mediacdn.vn/2021/5/4/2-16201262447501543747080.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-login-signup">
+        <form method = 'POST' action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{next}}">
+        <h1  class="title">Log In </h1> 
+        <label for="username" class="EP"> Username</label> 
+        <input type="text" class = "input_normal" id="username" name = "username" placeholder="Enter your username" required><br>
+
+        <label for="password" class="EP">Password</label>
+        <input type="password" class = "input_normal" id="password" name = "password" placeholder="Enter your password" required>
+        <a href="{% url 'password_reset' %}" class="other_Type_Link forgot" target="_blank">Forgot password? </a><br>
+        
+        <div class="action">
+            <a href = "{% url 'home' %}"> Home </a>
+            <button type="submit" class = "btn_login_signup">Login</button>
+        </div>
+        
+        <div class = "other_Type_Login">
+            <br>
+            <span>OR</span>
+            <span>
+                <i class="fa-brands fa-facebook icon" style="color: #316ed8;"></i>
+                <i class="fa-brands fa-google icon" style="color: #ed511d;"></i>
+            </span>
+            <span>
+            <label>Don't have an accout? </label>
+            <a href="{% url 'register' %}" class ="other_Type_Link"> Signup</a> 
+            </span>
+        </div>
+        </form>
+        {% if error %}
+            <p class="error">{{error}}</p>
+        {% endif %}
+
+    </div>
+</body>
+</html>

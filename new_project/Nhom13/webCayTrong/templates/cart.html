@@ -1,0 +1,297 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    
+    {% block content %}
+    <div class = "container-fluid goods-container-cart">
+        <h2 class = "title-container"> Giỏ hàng của bạn </h2>
+        <div class = "row d-flex justify-content-center align-items-center cart-title-columns">
+            <div class = "col-6">
+                <input type="checkbox" id = "select-all">
+                <label for = "select-all"> Sản phẩm </label>
+            </div>
+            <div class = "col-1"> Đơn giá </div>
+            <div class = "col-1"> Số lượng </div>
+            <div class = "col-2" style = "text-align:center"> Số tiền </div>
+            <div class = "col-1"> Xóa </div>
+        </div>
+        {% for item in cart_items %}
+        <div class = "row d-flex justify-content-center align-items-center cart-item" id = {{item.id}} >
+            <div class = "col-6 d-flex justify-content-start align-items-center">
+                <input type="checkbox" value = "{{item.id}}" class = "product-checkbox select-cart-item"
+                    data-price="{{ item.product.price }}"
+                    data-quantity="{{ item.quantity }}" id = {{item.product.id}}>
+                <img src="{% static 'images/' %}{{ item.product.image }}" alt="Sản phẩm" class = "cart-image" style = "width:100px;">
+                <a>{{ item.product.plant_name }}</a>
+            </div>
+            <div class = "col-1 d-flex justify-content-center align-items-center" id = "product-price-{{item.id}}"> {{ item.product.price }}  </div>
+            <div class = "col-1 d-flex justify-content-center align-items-center"> 
+                <div class="quantity-control d-flex justify-content-center align-items-center">
+                    <button type = "submit" class="quantity-increase" data-cart-item-id="{{ item.id }}">+</button>
+                    <div class="quantity-display"  id="quantity-{{ item.id }}">{{ item.quantity }}</div>
+                    <button type = "submit" class="quantity-decrease" data-cart-item-id="{{ item.id }}">-</button>
+                </div>
+            </div>
+            <div class = "col-2 d-flex justify-content-center align-items-center total_price" data-total-price="{{ item.total_price }}" id = "total-price-{{item.id}}">{{item.total_price}}</div>
+            <div class = "col-1 d-flex justify-content-center align-items-center"> 
+                <button type = "submit" class="delete-cart-item" data-cart-item-id="{{ item.id }}"><i class="fa-regular fa-trash-can cancle-icon"></i></button>
+            </div>
+        </div>
+        {% empty %}
+            <p class = "error-message">Giỏ hàng của bạn hiện đang trống.</p>
+        {% endfor %}
+
+
+
+        <div class = "row cart-footer-page d-flex align-items-center">
+            <div class = "vouchers d-flex justify-content-center align-items-center">
+                <label class="title">Mã giảm giá</label>
+                <div class = "choose-vouchers">Chọn hoặc nhập mã</div>
+            </div>
+            <div class ="reduce-payment d-flex justify-content-end align-items-center">-0 ngàn</div>
+            <div class = "total-payment d-flex justify-content-around align-items-center">
+                <div class = "all-products-checked">
+                    <input type="checkbox" id = "select-all-2">
+                    <label for = "select-all">Chọn tất cả </label>
+                </div>
+                <a href = "{% url 'delete_all' %}" class ="all-products-cancel">
+                    <i class="fa-regular fa-trash-can cancle-icon"></i>
+                    <label>Xóa tất cả </label> 
+                </a>
+                <div class = "total-payment d-flex justify-content-center align-items-center">
+                    <label for = "total-price">Tổng thanh toán </label>
+                    <div class = "total-price" id = "total-payment">0.00VNĐ</div>
+                    <button class = "purchase_ btn_login_signup">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const selectAllCheckbox = document.getElementById('select-all');
+        const productCheckboxes = document.querySelectorAll('.product-checkbox');
+        const selectAllCheckbox2 = document.getElementById('select-all-2');
+        // Lắng nghe sự kiện thay đổi của checkbox chủ
+        selectAllCheckbox.addEventListener('change', function() {
+            // Cập nhật tất cả các checkbox con khi checkbox chủ thay đổi
+            productCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox.checked;  // Khi chọn chủ thì tick tất cả, bỏ chọn chủ thì bỏ chọn tất cả
+            });
+            
+        });
+        selectAllCheckbox2.addEventListener('change', function() {
+            // Cập nhật tất cả các checkbox con khi checkbox chủ thay đổi
+            productCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = selectAllCheckbox2.checked;  // Khi chọn chủ thì tick tất cả, bỏ chọn chủ thì bỏ chọn tất cả
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            function getCsrfToken() {
+                var name = 'csrftoken';
+                var value = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                return value ? value.pop() : '';
+            }
+
+            // Thêm CSRF token vào header của tất cả các yêu cầu AJAX
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRFToken': getCsrfToken()
+                }
+            });
+            function calculateTotalPayment() {
+                var totalPayment = 0; // tạo biến tổng thanh toán
+
+                // Duyệt qua tất cả các checkbox đã được chọn
+                $('.product-checkbox:checked').each(function() {
+                    var cartItemId = $(this).attr('value'); // lấy id sản phẩm
+                    var quantityElement = $('#quantity-' + cartItemId); // số lượng sản phẩm
+                    var quantity = parseInt(quantityElement.text()); // chuyển đổi số lượng sang interger
+                    var priceElment = $('#product-price-'+cartItemId); // lấy giá sản phẩm
+                    var price = parseInt(priceElment.text()); // chuyển đổi sang dạng interger
+                    var totalPrice = price * quantity; // tính tổng giá của sản phẩm
+                    totalPayment += totalPrice; // thực hiện cộng dồn 
+                });
+
+                // Cập nhật tổng thanh toán vào giao diện
+                $('#total-payment').text(totalPayment.toFixed(2) + ' VND');
+            }
+            // Tăng số lượng sản phẩm
+            $('.quantity-increase').click(function() {
+                var cartItemId = $(this).data('cart-item-id'); // lấy id sản phẩm
+                var quantityElement = $('#quantity-' + cartItemId); // lấy số lượng sản phẩm hiện tại 
+                var quantity = parseInt(quantityElement.text()) + 1; // tăng số lượng lên 1
+                var total = $('#total-price-'+cartItemId); // lấy phần tử hiển thị  tổng giá của sản phẩm tương ứng
+                var priceElment = $('#product-price-'+cartItemId); // lấy phần tử hiện thị giá sản phẩm tương ứng
+                var price = parseInt(priceElment.text()); // chuyển đổi giá sang int
+                var totalPrice = quantity * price; // tính lại tổng giá của sản phẩm 
+                
+                // Gửi yêu cầu AJAX để cập nhật số lượng
+                $.ajax({
+                    url: "{% url 'update_cart_item_quantity' %}",
+                    type: 'POST',
+                    data: {
+                        'cart_item_id': cartItemId,
+                        'quantity': quantity,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Cập nhật lại số lượng 
+                            quantityElement.text(quantity); // cập nhật lại phần tử hiển thị số lượng
+                            total.text(totalPrice + 'VNĐ') // cập nhật lại phần tử hiển thị giá
+                            calculateTotalPayment(); // gọi hàm cập nhật lại tổng thanh toán nếu sản phẩm đang được chọn 
+
+                        } else {
+                            alert(response.message);// gửi lỗi nếu hàm không hoạt động đúng 
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại!'); // gửi lỗi nếu dữ liệu trả về không đúng 
+                    }
+                });
+            });
+
+            // Giảm số lượng sản phẩm
+            $('.quantity-decrease').click(function() {
+                var cartItemId = $(this).data('cart-item-id'); // lấy id sản phẩm 
+                var quantityElement = $('#quantity-' + cartItemId); // lấy số lượng sản phẩm
+                var quantity = parseInt(quantityElement.text()) - 1; // chuyển kiểu dữ liệu và trừ đi 1
+                var total = $('#total-price-'+cartItemId); // lấy phần tử hiển thị tổng giá của sản phẩm
+                var priceElment = $('#product-price-'+cartItemId); // lấy phần tử hiển thị giá sản phẩm
+                var price = parseInt(priceElment.text()); // chuyển giá sản phẩm sang interger
+                var totalPrice = quantity * price; // tính lại tổng giá của sản phẩm 
+                // Kiểm tra số lượng phải lớn hơn 1
+                if (quantity < 1) {
+                    alert('Số lượng phải lớn hơn hoặc bằng 1');
+                    return;
+                }
+
+                // Gửi yêu cầu AJAX để cập nhật số lượng
+                $.ajax({
+                    url: "{% url 'update_cart_item_quantity' %}",
+                    type: 'POST',
+                    data: {
+                        'cart_item_id': cartItemId,
+                        'quantity': quantity,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Cập nhật lại số lượng và tổng giá của sản phẩm
+                            quantityElement.text(quantity); // cập nhật lại số lượng
+                            total.text(totalPrice + 'VNĐ') // cập nhật lại tổng giá 
+                            calculateTotalPayment(); // cập nhật lại tổng thanh toán nếu sản phẩm đang được chọn 
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                    }
+                });
+            });
+
+            $('.delete-cart-item').click(function() { 
+                var cartItemId = $(this).data('cart-item-id');  // Lấy ID của sản phẩm 
+                var divCha = $('#'+cartItemId); // lấy thẻ chứa sản phẩm 
+                
+                // Gửi yêu cầu AJAX để xóa sản phẩm khỏi giỏ hàng
+                $.ajax({
+                    url: "{% url 'delete_cart_item' %}",  
+                    type: 'POST',
+                    data: {
+                        'cart_item_id': cartItemId
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Nếu xóa thành công, loại bỏ sản phẩm khỏi giỏ hàng
+                            divCha.remove(); // xóa bỏ thẻ chứa 
+                            $('#cart-item-' + cartItemId).remove();  // Loại bỏ phần tử có id cart-item-{cartItemId} khỏi bảng
+
+                            
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                    }
+                });
+            });
+            $(document).ready(function() {
+            // Hàm tính toán tổng thanh toán
+
+            // Lắng nghe sự kiện thay đổi trạng thái của checkbox (tick/uncheck)
+            $('.product-checkbox').change(function() {
+                calculateTotalPayment();  // Gọi hàm tính tổng thanh toán mỗi khi checkbox thay đổi
+            });
+
+            // Chọn/deselect tất cả sản phẩm
+            $('#select-all').change(function() {
+                var isChecked = $(this).prop('checked');  // Lấy trạng thái của checkbox "Chọn tất cả"
+                $('.product-checkbox').prop('checked', isChecked);  // Thay đổi trạng thái của tất cả các checkbox
+                calculateTotalPayment();  // Cập nhật lại tổng thanh toán
+            });
+            $('#select-all-2').change(function() {
+                var isChecked = $(this).prop('checked');  // Lấy trạng thái của checkbox "Chọn tất cả"
+                $('.product-checkbox').prop('checked', isChecked);  // Thay đổi trạng thái của tất cả các checkbox
+                calculateTotalPayment();  // Cập nhật lại tổng thanh toán
+            });
+
+            $('.purchase_').click(function() {
+                var list_item = []; 
+                $('.product-checkbox:checked').each(function() {
+                    list_item.push($(this).attr('id'));
+                });
+                var list_item_str = list_item.join(',');
+                $.ajax({
+                        url: "{% url 'payment_list' %}",
+                        type: 'POST',
+                        data: {
+                            'list_id': list_item_str,
+                            'csrfmiddlewaretoken': '{{ csrf_token }}'
+                        },
+                        success: function(response) {
+                        if (response.status === 'success') {
+                            window.location.href = response.next_url;
+                        } else {
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Có lỗi xảy ra. Vui lòng thử lại!');
+                    }
+                    });
+            });
+
+            });
+
+
+
+
+        });
+    </script>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+    
+
+</body>
+</html>

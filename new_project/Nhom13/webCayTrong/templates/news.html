@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>news</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.js' %}"> <!-- Link to JS file -->
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .news-title-page{
+            font-size:2.5rem;
+            font-weight:800;
+            font-family: "Helvetica Neue",Helvetica,Arial;
+            color:#59c659;
+            margin:2rem;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+   
+    {% block content %}
+    <div class = "container-fluid goods-container scrollable-container">
+        <h1 class = "news-title-page"> Tin Tức</h1>
+        <div class = "row news-container">
+            <div class = "col-4 new-container">
+                <a class ="link-news" href = "https://webcaycanh.com/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi/" >
+                    <img class="img-news" src = "https://webcaycanh.com/wp-content/uploads/2024/08/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi-350x245.jpg">
+                    <h4 class="title-news">Nên tưới cây bằng nước máy hay nước đun sôi để nguội?</h4>
+                </a>
+            </div>
+            <div class = "col-4 new-container">
+                <a class ="link-news" href = "https://webcaycanh.com/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi/" >
+                    <img class="img-news" src = "https://webcaycanh.com/wp-content/uploads/2024/08/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi-350x245.jpg">
+                    <h4 class="title-news">Nên tưới cây bằng nước máy hay nước đun sôi để nguội?</h4>
+                </a>
+            </div>
+        </div>
+        <div class = "row news-container">
+            <div class = "col-4 new-container">
+                <a class ="link-news" href = "https://webcaycanh.com/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi/" >
+                    <img class="img-news" src = "https://webcaycanh.com/wp-content/uploads/2024/08/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi-350x245.jpg">
+                    <h4 class="title-news">Nên tưới cây bằng nước máy hay nước đun sôi để nguội?</h4>
+                </a>
+            </div>
+            <div class = "col-4 new-container">
+                <a class ="link-news" href = "https://webcaycanh.com/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi/" >
+                    <img class="img-news" src = "https://webcaycanh.com/wp-content/uploads/2024/08/nen-tuoi-cay-bang-nuoc-may-hay-nuoc-dun-soi-de-nguoi-350x245.jpg">
+                    <h4 class="title-news">Nên tưới cây bằng nước máy hay nước đun sôi để nguội?</h4>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <style>
+        .news-title-page{
+            font-size:2.5rem;
+            font-weight:800;
+            font-family: "Helvetica Neue",Helvetica,Arial;
+            color:#59c659;
+            margin:2rem;
+            text-align:center;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+</body>
+</html>

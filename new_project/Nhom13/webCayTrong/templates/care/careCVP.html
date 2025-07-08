@@ -1,0 +1,182 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVP</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    
+    {% block content %}
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-8 content">
+                <h1> Chăm sóc cây văn phòng </h1>
+                
+                <h4>Tầm quan trọng của cây văn phòng</h4>
+                <p>
+                    Cây xanh trong không gian văn phòng không chỉ tạo nên vẻ đẹp tự nhiên
+                    mà còn mang lại nhiều lợi ích cho sức khỏe và hiệu suất làm việc. 
+                    Các nghiên cứu đã chỉ ra rằng cây xanh có khả năng cải thiện 
+                    chất lượng không khí, giúp lọc bỏ các chất độc hại và cung cấp oxy. 
+                    Ngoài ra, chúng còn giúp giảm căng thẳng, lo âu, từ đó nâng cao 
+                    tinh thần làm việc và sáng tạo của nhân viên.
+                </p>
+                <h4> Lợi ích sức khỏe</h4>
+                <p>
+                    Nhiều nghiên cứu đã chỉ ra rằng có cây xanh trong văn phòng 
+                    có thể cải thiện tâm trạng, giảm mệt mỏi và tăng cường sự hài lòng 
+                    trong công việc. Một nghiên cứu của Đại học Exeter cho thấy rằng nhân 
+                    viên làm việc trong môi trường có cây xanh có năng suất cao hơn 15% 
+                    so với những người không có. Cây xanh cũng giúp giảm tiếng ồn, tạo 
+                    không gian làm việc thoải mái hơn.
+                </p>
+                
+                <h4> Các loại cây văn phòng phổ biến</h4>
+                <ol>
+                    <li>
+                        <b>Cây lưỡi hổ (Sansevieria):</b> 
+                        Cây lưỡi hổ là một trong những loại cây dễ chăm sóc nhất, 
+                        có khả năng sống trong điều kiện ánh sáng yếu và có khả năng 
+                        lọc không khí hiệu quả, giúp loại bỏ các chất ô nhiễm như 
+                        formaldehyde.
+                    </li>
+                    <li>
+                        <b>Cây phát tài (Pachira aquatica):</b> 
+                        Cây phát tài không chỉ mang lại may mắn và tài lộc mà 
+                        còn rất thích hợp cho không gian văn phòng nhờ khả năng 
+                        chịu đựng tốt trong môi trường khép kín.
+                    </li>
+                    <li>
+                        <b>Cây kim tiền (Zamioculcas zamiifolia):</b>
+                        Cây kim tiền là biểu tượng của sự thịnh vượng và tài lộc. 
+                        Nó rất dễ sống, không cần nhiều ánh sáng và có thể chịu được 
+                        thời gian thiếu nước.
+                    </li>
+                    <li>
+                        <b>Cây nha đam (Aloe vera):</b> 
+                        Nha đam không chỉ có tác dụng thanh lọc không khí mà còn dễ dàng 
+                        chăm sóc, phù hợp cho những người mới bắt đầu. 
+                        Nó cũng có nhiều công dụng trong chăm sóc sức khỏe và làm đẹp.
+                    </li>
+                </ol>
+                
+                <h4>Hướng dẫn chăm sóc cây</h4>
+                <ol>
+                    <li>
+                        <b>Ánh sáng:</b> 
+                        Tùy thuộc vào từng loại cây, cần cung cấp mức độ ánh sáng phù hợp.
+                        Ví dụ, cây lưỡi hổ có thể sống trong ánh sáng yếu, 
+                        trong khi cây phát tài cần ánh sáng gián tiếp để phát triển tốt.
+                    </li>
+                    <li>
+                        <b>Phân bón:</b> 
+                        Sử dụng phân bón hữu cơ hoặc phân bón dạng lỏng cho cây mỗi 
+                        4-6 tuần một lần vào mùa xuân và mùa hè để đảm bảo cây phát 
+                        triển tốt.
+                    </li>
+                    <li>
+                        <b>Tưới nước:</b> 
+                        Hướng dẫn tưới nước cho cây cần căn cứ vào từng loại. 
+                        Thông thường, nên kiểm tra độ ẩm của đất trước khi tưới. 
+                        Cây lưỡi hổ và kim tiền không cần tưới thường xuyên, 
+                        trong khi cây nha đam cần độ ẩm ổn định hơn.
+                    </li>
+                    <li>
+                        <b>Cắt tỉa:</b> 
+                        Thường xuyên kiểm tra cây và cắt bỏ những lá khô héo, 
+                        vàng úa để duy trì hình dáng và sức khỏe cây. 
+                        Cắt tỉa cũng giúp cây phát triển đều hơn.
+                    </li>
+                </ol>
+                <h4>Giải pháp khắc phục sự cố</h4>
+                <ul>
+                    <li>
+                        <b>Cây héo úa:</b> 
+                        Nguyên nhân thường gặp là do tưới nước quá nhiều hoặc thiếu nước. 
+                        Kiểm tra độ ẩm của đất. Nếu đất quá ướt, cần để cây khô một 
+                        thời gian và điều chỉnh tần suất tưới. 
+                        Ngược lại, nếu cây thiếu nước, hãy tưới ngay và đảm bảo đất luôn 
+                        có độ ẩm vừa phải.
+                    </li>
+                    <li>
+                        <b>Cây vàng lá:</b> 
+                        Cây vàng lá có thể do nhiều nguyên nhân như ánh sáng quá mạnh 
+                        hoặc yếu, tưới nước không đúng cách, hoặc thiếu chất dinh dưỡng. 
+                        Kiểm tra vị trí đặt cây, điều chỉnh ánh sáng phù hợp và đảm bảo 
+                        tưới nước đúng cách. Nếu cần, bổ sung phân bón để cung cấp dinh 
+                        dưỡng.
+                    </li>
+                    
+                    <li>
+                        <b>Sâu bệnh: </b> 
+                        Các loại sâu bệnh thường gặp bao gồm rệp, nhện đỏ và nấm mốc. 
+                        Kiểm tra lá cây thường xuyên để phát hiện sớm. 
+                        Nếu thấy sâu, có thể dùng nước xà phòng nhẹ để rửa sạch 
+                        hoặc sử dụng thuốc trừ sâu hữu cơ. Đối với nấm mốc, 
+                        cần đảm bảo không gian thông thoáng và giảm độ ẩm xung quanh cây.
+                    </li>
+                </ul>
+
+                <h4>Cây Cảnh Tươi Xanh </h4>
+                <p>– Mang thiên nhiên đến gần hơn với cuộc sống của bạn!</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .row{
+            justify-content:center;
+
+        }
+        .content{
+            margin:2rem;
+            font-family: 'Times New Roman', Times, serif;
+            color:#333;
+            line-height: 3rem;
+        }
+        .content h1{
+            color:#59c659;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+        .content h4{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .content p{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        ul li::marker {
+            font-size: 1.5rem;
+        
+        }
+        ol li::marker {
+            font-size: 1.5rem;
+        
+        }
+        li{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .content a{
+            cursor: pointer;
+            text-decoration: none;
+            font-style:italic;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+    
+
+</body>
+</html>

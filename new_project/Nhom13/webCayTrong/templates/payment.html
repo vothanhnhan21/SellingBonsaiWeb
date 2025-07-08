@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.js' %}"> <!-- Link to JS file -->
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    {% if cartItems %}
+    <div class = "container payment-container">
+        <div class = "payment-content">
+            <h1> Đơn Hàng Của {{request.user.username}} </h1>
+            <div class = "scrollable scroll-payment">
+            {% for item in cartItems %}
+            <div class = "row d-flex justify-content-center align-items-center cart-item" style = "height: auto;border: 1px solid;width:100%">
+                <div class = "col-6 d-flex justify-content-start align-items-center">
+                    <img src="{% static 'images/' %}{{ item.product__image }}" alt="Sản phẩm" class = "cart-image" style = "width:100px;">
+                    <a>{{ item.product__plant_name }}</a>
+                </div>
+                <div class = "col-3 d-flex justify-content-center align-items-center"> Giá: {{ item.product__price }}VNĐ  </div>
+                <div class = "col-3 d-flex justify-content-center align-items-center"> 
+                    <div class="quantity-control d-flex justify-content-center align-items-center">
+                        <div class="quantity-display"  id="quantity-{{ item.id }}">Số lượng: {{ item.quantity }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor%}
+            </div>
+            <div class = "payment-content-footer">
+                <div class = "user-address">Địa chỉ: {{user_address.address}}</div>
+                <div class = "user-phone"> Số điện thoại: {{user_address.phone}}</div>
+                <div class = "delivery-cost"></div>
+                <div class = "total">Tổng: {{total}} VNĐ</div>
+                <a href = "{% url 'payment_submit' %}" class="purchase-submit fake_btn">Mua</a>
+                <a href = "{% url 'home' %}" class="fake_btn">Home</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if product %}
+    <div class = "container payment-container">
+        <div class = "payment-content" style = "justify-content: center;">
+            <h1> Đơn Hàng Của {{request.user.username}} </h1>
+            <div class = "row d-flex justify-content-center align-items-center cart-item" style = "height: auto;border: 1px solid;width:100%">
+                <div class = "col-6 d-flex justify-content-start align-items-center">
+                    <img src="{% static 'images/' %}{{ product.image }}" alt="Sản phẩm" class = "cart-image" style = "width:100px;">
+                    <a>{{ product.name }}</a>
+                </div>
+                <div class = "col-3 d-flex justify-content-center align-items-center"> Giá: {{ product.price }}VNĐ  </div>
+                <div class = "col-3 d-flex justify-content-center align-items-center"> 
+                    <div class="quantity-control d-flex justify-content-center align-items-center">
+                        <div class="quantity-display"  id="quantity-{{ item.id }}">Số lượng:{{ product.quantity }}</div>
+                    </div>
+                </div>
+            
+            </div>
+            <div class = "payment-content-footer">
+                <div class = "user-address">Địa chỉ: {{user_address.address}}</div>
+                <div class = "user-phone"> Số điện thoại: {{user_address.phone}}</div>
+                <div class = "delivery-cost"></div>
+                <div class = "total">Tổng: {{total}} VNĐ</div>
+                <a href = "{% url 'payment_submit' %}" class="purchase-submit fake_btn">Mua</a>
+                <a href = "{% url 'home' %}" class="fake_btn">Home</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+<!-- Bootstrap JS và phụ thuộc -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    
+</script>
+</body>
+</html>

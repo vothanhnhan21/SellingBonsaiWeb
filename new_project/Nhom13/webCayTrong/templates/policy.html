@@ -1,0 +1,111 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>policy</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    {% block content %}
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-8 content">
+                <h1> Chính Sách </h1>
+                <p>Chính sách bảo hành này nhằm đảm bảo quyền lợi của khách hàng khi mua 
+                sản phẩm cây trồng hoặc các sản phẩm liên quan từ website của chúng tôi.!
+                </p>
+                <h4>Thời Gian Bảo Hành</h4>
+                <p>
+                    <b>Cây Trồng:</b> Chúng tôi cam kết bảo hành cho cây trồng 
+                    trong thời gian 7 ngày kể từ ngày nhận hàng.<br> 
+                    Trong thời gian này, nếu cây không phát triển 
+                    hoặc chết do lỗi của chúng tôi, khách hàng có thể yêu cầu đổi hoặc hoàn tiền.
+                
+                </p>
+                <h4> Điều Kiện Bảo Hành</h4>
+                <ul>
+                    <li>Cây trồng phải được chăm sóc đúng cách theo hướng dẫn
+                     của chúng tôi.</li>
+                    <li>Khách hàng cần cung cấp hóa đơn mua hàng và thông tin chi tiết 
+                    về tình trạng của cây hoặc sản phẩm khi yêu cầu bảo hành.</li>
+                    <li>Không bảo hành cho những cây đã bị hư hại do thiên tai, 
+                    sâu bệnh, hoặc sự bất cẩn trong quá trình chăm sóc.</li>
+                </ul>
+                
+                <h4>Quy Trình Đổi/Hoàn Tiền</h4>
+                <ul>
+                    <li>Khách hàng cần liên hệ với chúng tôi qua email hoặc 
+                    số điện thoại trong thời gian bảo hành.</li>
+                    <li>Chúng tôi sẽ yêu cầu gửi lại hình ảnh hoặc 
+                    thông tin liên quan để xác minh yêu cầu.</li>
+                    <li>Sau khi xác minh, chúng tôi sẽ tiến hành đổi sản phẩm hoặc 
+                    hoàn tiền theo yêu cầu của khách hàng.</li>
+                </ul>
+                <p>
+                Chúng tôi không chỉ đơn thuần là một cửa hàng cây cảnh; 
+                chúng tôi là nơi để bạn khám phá, học hỏi và kết nối với những người có cùng đam mê. 
+                Hãy theo dõi blog của chúng tôi để cập nhật những thông tin mới nhất về cây cảnh, 
+                xu hướng thiết kế không gian xanh và mẹo chăm sóc cây.
+                </p>
+                <h4>Miễn Trừ Trách Nhiệm</h4>
+                <p>
+                Chúng tôi không chịu trách nhiệm cho những thiệt hại phát sinh do
+                việc không tuân thủ hướng dẫn chăm sóc hoặc các yếu tố bên ngoài không thể kiểm soát.
+                </p>
+
+                <h4>Cây Cảnh Tươi Xanh </h4>
+                <p>– Mang thiên nhiên đến gần hơn với cuộc sống của bạn!</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .row{
+            justify-content:center;
+
+        }
+        .content{
+            margin:2rem;
+            font-family: 'Times New Roman', Times, serif;
+            color:#333;
+            line-height: 3rem;
+        }
+        .content h1{
+            color:#59c659;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+        .content h4{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .content p{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        ul li::marker {
+            font-size: 2rem;
+        
+        }
+        li{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .content a{
+            cursor: pointer;
+            text-decoration: none;
+            font-style:italic;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+
+    
+</body>
+</html>

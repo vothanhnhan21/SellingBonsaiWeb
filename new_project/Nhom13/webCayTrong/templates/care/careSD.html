@@ -1,0 +1,174 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVP</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.js' %}"> <!-- Link to JS file -->
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    {% block content %}
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-8 content">
+                <h1> Chăm sóc sen đá </h1>
+                
+                <h4>Tầm quan trọng của sen đá</h4>
+                <p>
+                    Sen đá (hay còn gọi là cây xương rồng nhỏ) 
+                    à một trong những loại cây cảnh phổ biến trong văn phòng và 
+                    không gian sống. Với hình dáng độc đáo và màu sắc tươi sáng, 
+                    sen đá không chỉ tạo điểm nhấn cho không gian mà còn mang lại 
+                    nhiều lợi ích cho sức khỏe. Chúng có khả năng lọc không khí, 
+                    giảm căng thẳng và cải thiện tâm trạng cho nhân viên, 
+                    làm cho môi trường làm việc trở nên thoải mái hơn.
+                </p>
+                <h4> Lợi ích sức khỏe</h4>
+                <p>
+                    Sen đá có khả năng hút bụi và các chất độc hại trong không khí, 
+                    giúp cải thiện chất lượng không khí xung quanh. 
+                    Ngoài ra, cây còn có tác dụng giảm stress, 
+                    mang lại sự thư giãn và làm dịu tâm trạng. 
+                    Với việc chăm sóc đúng cách, sen đá có thể sống lâu năm, 
+                    trở thành một phần của không gian văn phòng
+                </p>
+                
+                <h4> Các loại sen đá phổ biến</h4>
+                <ol>
+                    <li>
+                        <b>Sen đá Echeveria:</b> 
+                        Với những lá dày và hình dạng như bông hoa, 
+                        sen đá Echeveria rất dễ chăm sóc và có khả năng chịu hạn tốt.
+                    </li>
+                    <li>
+                        <b>Sen đá Haworthia:</b> 
+                        Có hình dáng độc đáo với các đường sọc trắng, 
+                        Haworthia thích hợp cho những nơi có ánh sáng yếu và rất dễ sống.
+                    </li>
+                    <li>
+                        <b>Sen đá Sedum:</b>
+                        Là loại sen đá phát triển nhanh, có nhiều hình dạng và 
+                        màu sắc khác nhau. Sedum thường được sử dụng để trang trí bàn 
+                        làm việc.
+                    </li>
+                    <li>
+                        <b>Sen đá Graptopetalum:</b> 
+                        Với màu sắc nhẹ nhàng, sen đá Graptopetalum không chỉ đẹp mà 
+                        còn có khả năng chịu đựng tốt trong điều kiện khô hạn.
+                    </li>
+                </ol>
+                
+                <h4>Hướng dẫn chăm sen đá</h4>
+                <ol>
+                    <li>
+                        <b>Ánh sáng:</b> 
+                        Sen đá cần ánh sáng mạnh để phát triển khỏe mạnh. 
+                        Đặt cây ở nơi có ánh sáng gián tiếp hoặc ánh sáng mặt trời 
+                        trực tiếp từ 4-6 giờ mỗi ngày.
+                    </li>
+                    <li>
+                        <b>Phân bón:</b> 
+                        Sử dụng phân bón cho xương rồng hoặc phân hữu cơ một lần mỗi tháng vào mùa xuân và 
+                        mùa hè để hỗ trợ sự phát triển của cây.
+                    </li>
+                    <li>
+                        <b>Tưới nước:</b> 
+                        Sen đá rất nhạy cảm với nước, 
+                        do đó chỉ tưới khi đất khô hoàn toàn. 
+                        Thông thường, tần suất tưới là 1-2 lần mỗi tháng, 
+                        tùy thuộc vào điều kiện thời tiết.
+                    </li>
+                    <li>
+                        <b>Cắt tỉa:</b> 
+                        Kiểm tra cây thường xuyên để loại bỏ lá khô héo hoặc sâu bệnh. 
+                        Cắt tỉa giúp duy trì hình dáng và sức khỏe của cây.
+                    </li>
+                </ol>
+                <h4>Giải pháp khắc phục sự cố</h4>
+                <ul>
+                    <li>
+                        <b>Cây héo úa:</b> 
+                        Nguyên nhân có thể do tưới nước quá nhiều hoặc thiếu nước. 
+                        Kiểm tra độ ẩm của đất; nếu đất ướt, cần để cây khô lại, nếu khô, 
+                        hãy tưới nước từ từ.
+                    </li>
+                    <li>
+                        <b>Cây vàng lá:</b> 
+                        Cây vàng lá thường do ánh sáng không đủ hoặc tưới nước quá nhiều. 
+                        Đảm bảo cây nhận đủ ánh sáng và điều chỉnh tần suất tưới nước.
+                    </li>
+                    
+                    <li>
+                        <b>Sâu bệnh: </b> 
+                        Sen đá có thể bị ảnh hưởng bởi rệp, nhện đỏ hoặc nấm mốc. 
+                        Kiểm tra lá thường xuyên và sử dụng nước xà phòng nhẹ hoặc 
+                        thuốc trừ sâu hữu cơ để xử lý khi phát hiện sâu bệnh.
+                    </li>
+                </ul>
+                <p>
+                    Sen đá là lựa chọn lý tưởng cho những ai yêu thích cây cảnh nhưng 
+                    không có nhiều thời gian chăm sóc. Với việc chăm sóc đúng cách, 
+                    sen đá sẽ mang lại vẻ đẹp và sức sống cho không gian làm việc của bạn! 
+                    Nếu bạn cần thêm thông tin nào khác, hãy để chúng tôi hỗ trợ bạn!
+                </p>
+                <h4>Cây Cảnh Tươi Xanh </h4>
+                <p>– Mang thiên nhiên đến gần hơn với cuộc sống của bạn!</p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .row{
+            justify-content:center;
+
+        }
+        .content{
+            margin:2rem;
+            font-family: 'Times New Roman', Times, serif;
+            color:#333;
+            line-height: 3rem;
+        }
+        .content h1{
+            color:#59c659;
+            font-weight: 800;
+            margin-bottom: 3rem;
+        }
+        .content h4{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .content p{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        ul li::marker {
+            font-size: 1.5rem;
+        
+        }
+        ol li::marker {
+            font-size: 1.5rem;
+        
+        }
+        li{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+        .content a{
+            cursor: pointer;
+            text-decoration: none;
+            font-style:italic;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+
+</body>
+</html>

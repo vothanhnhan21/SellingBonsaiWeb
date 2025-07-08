@@ -1,0 +1,91 @@
+{% extends "index.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>connection</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    
+    {% block content %}
+    <div class = "container-fluid">
+        <div class = "row">
+            <div class = "col-8 content">
+                <h1>Liên hệ</h1>
+                <h4>Liên hệ trực tiếp tại</h4>
+                 <div class="contact-web">
+                    <span>SĐT: 090909090909</span>
+                    <span>Email: Group13@gmail.com</span>
+                    <span>Địa chỉ: Đại Học Nông Lâm TP HCM</span>
+                </div>
+
+                <h4>Liên hệ thông qua các nền tảng khác</h4>
+                <div class = "other-platforms-web">
+                    <a><i class="fa-brands fa-facebook"></i> Facebook</a>
+                    <a><i class="fa-brands fa-tiktok"></i> TikTok</a>
+                    <a><i class="fa-brands fa-youtube"></i> Youtube</a>
+                </div>
+
+                <h4>Bản Đồ Địa Điểm</h4>
+                <div class = "location">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2145947051063!2d106.7891867748064!3d10.871276389283322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175276398969f7b%3A0x9672b7efd0893fc4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBOw7RuZyBMw6JtIFRQLiBI4buTIENow60gTWluaA!5e0!3m2!1svi!2s!4v1729849379624!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <h4>Giờ Làm Việc</h4>
+                <p>Thứ Hai - Thứ Sáu: 9:00 - 17:00</p>
+
+            </div>
+        </div>
+    </div>
+    <style>
+        .row{
+            justify-content:center;
+            margin:3rem;
+
+        }
+        .content h1{
+            color:#59c659;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            line-height:2.5rem;
+        }
+        .content h4{
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .contact-web{
+            font-size: 1.5rem;
+            display:flex;
+            flex-direction:column;
+        }
+        .contact-web span{
+            margin-bottom:1rem;
+        }
+        .other-platforms-web{
+            font-size: 1.5rem;
+            display:flex;
+            flex-direction:column;
+        }
+        .other-platforms-web a{
+            margin-bottom:1rem;
+            cursor:pointer;
+        }
+        .content p{
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+        }
+    </style>
+    {% endblock %}
+    {%block pagination %}{% endblock %}
+    
+</body>
+</html>

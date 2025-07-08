@@ -1,0 +1,395 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Link to CSS file -->
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'index.js' %}"> <!-- Link to JS file -->
+    <!-- link to fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    {%block message %}
+    <div class="notification-container">
+        <ul>
+            {% for message in messages %}
+                <li class="alert alert-{{ message.tags }} message-item">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <style>
+        /* Container for the notification messages, fixed at the top of the page */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;  /* Ensure the notification is above other content */
+        }
+
+        /* Style for each notification item */
+        .message-item {
+            opacity: 0;
+            list-style-type: none;
+            position: relative;
+            left: -100vw; /* Start outside the screen from the left */
+            animation: slide-in 1s forwards; /* Slide-in effect */
+            margin-bottom: 10px; /* Space between notifications */
+        }
+
+        /* Animation for sliding in from the left */
+        @keyframes slide-in {
+            0% {
+                opacity: 0;
+                left: -100vw; /* Start completely off-screen to the left */
+            }
+            100% {
+                opacity: 1;
+                left: 0; /* Move into its natural position */
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+        // Hide the messages after 2 seconds with a fade-out effect
+        setTimeout(function() {
+            const messages = document.querySelectorAll('.message-item');
+            
+            // Iterate through each message and fade it out
+            messages.forEach(function(message) {
+                message.style.transition = "opacity 1s";
+                    message.style.opacity = '0'; // Fade out the message
+                    setTimeout(function() {
+                        message.style.display = 'none'; // Hide the message after fading out
+                    }, 1000); // Wait for 1 second (fade duration)
+                });
+            }, 2000);  // 2000 milliseconds = 2 seconds after showing the message
+    </script>
+
+    {% endblock %}
+
+
+    <!-- Navigation -->
+    {% block header %}
+    {% with request.resolver_match.url_name as url_name %}
+    <div class = "header">
+        <a class="navbar-brand Logo" href="{% url 'home' %}"></a>
+        
+        <nav class="navbar navbar-expand-lg d-flex justify-content-between align-items-center">
+            <div class = "navbar-find d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-magnifying-glass buttonFind"></i>
+                <form method="POST" action="{% url 'findPage' %}">
+                    {% csrf_token %}
+                    <input type="text" id = "input-find" name = 'input-find' placeholder = " search...">
+                </form>
+            </div>
+            <button class="navbar-toggler toggler-button" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars toggler-icon"></i>
+            </button>
+            <div class="collapse navbar-collapse text-white  align-items-center"  id="navbarNav">
+                <ul class="navbar-nav">
+                
+                    <li class="nav-item item-users">
+                        <div class = "shopping-cart">
+                            <a class="nav-link shopping-containt text-white cart-icon" id = "cart-icon" href="{% url 'cart' %}"> 
+                                <i class="fa-solid fa-cart-shopping icon icon-users"></i>
+                            </a>
+                            {% if user.is_authenticated %}
+                            <div class = "triangle-cart"></div>
+                            {% else %} 
+                            <div class = "triangle-cart hidden"></div>
+                            {% endif %}
+                            <div class = "cart">
+                                <div class = "cart-title"> Sản phẩm đã thêm</div>
+                                {% if user.is_authenticated %} <!-- kiểm tra user đã đăng nhập hay chưa -->
+                                    {% if cart_items %} <!-- kiểm tra giỏ hàng người dùng có sản phẩm hay không -->
+                                    <div class = "cart-content scrollable">
+                                        {% for item in cart_items %}<!-- hiển thị sản phẩm -->
+                                            <div class = "product-cart"> 
+                                                <img src="{% static 'images/' %}{{ item.product.image }}" style = "width:80px;" alt="Sản phẩm">
+                                                <h4>{{item.product.plant_name}}</h4>
+                                                <span class="price">{{item.product.price}}Đ</span>
+                                                <span class="quantity">{{item.quantity}}Cây</span>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class = "cart-footer">
+                                        <a class="nav-link shopping-containt text-black" href="{% url 'cart' %}">Xem Giỏ Hàng</a>
+                                    </div>
+                                    {% else %} <!-- hiển thị khi người dùng chưa thêm sản phẩm -->
+                                    <div class="product-none" style = "color:black;"><strong>Giỏ hàng của bạn trống</strong></div>
+                                    {% endif %}
+                                {% else %}<!-- hiển thị khi người dùng chưa đăng nhập -->
+                                <div class="product-no-login" style = "color:black;"><strong>Hãy đăng nhập để xem giỏ hàng</strong></div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item item-users">
+                        <a class="nav-link text-white users" href="{% url 'login' %}">
+                            <i class="fa-solid fa-user icon icon-users"></i>
+                         </a>
+                    </li>
+                    {% if user.is_authenticated%}
+                    <li class="nav-item item-users">
+                        <form action = "{% url 'logout' %}" method = "post">
+                            {% csrf_token %}
+                            <button class = "logout-button" type = "submit"> <i class="fa-solid fa-right-from-bracket icon icon-users"></i> </button>
+                        </form>
+                    </li>
+                    {% endif %}
+                    
+                    
+                </ul>
+            </div>
+        </nav>
+    </div>
+    {% endwith %}
+    {% endblock %}
+
+    {% block navbar %}
+    {% with request.resolver_match.url_name as url_name %}
+    <nav class="navbar-main navbar-expand-lg d-flex justify-content-between align-items-center">
+
+        <button class="navbar-toggler m-4 toggler-button" type="button" data-toggle="collapse" data-target="#navbarNav-main" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars toggler-icon"></i>
+        </button>
+        <div class="collapse navbar-collapse text-white  d-flex justify-content-between align-items-center "  id="navbarNav-main">
+            <ul class="navbar-nav-main d-flex justify-content-around align-item-center">
+                <li class="nav-item-main home-icon {% if url_name == 'home' %}active{% endif %}">
+                    <a class = "main-page" href = "{% url 'home' %}"><i class="fa-solid fa-house"></i></a>
+                </li>
+                <li class="nav-item-main DMSP">
+                    <i class="fa-solid fa-list list-products-icon"></i>
+                    <a class="navbar-link" href="{% url 'home' %}">Danh mục sản phẩm</a>
+                    <div class = "buffer-product-catergory"></div>
+                    <div class = "kinds-of-products">
+                        <ul class="list-container d-flex justify-content-around align-item-center">
+                            
+                            <li class = "kind-of-product {% if url_name == 'CPT' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CPT' %}">Cây phong thủy</a>
+                            </li>
+
+                            <li class = "kind-of-product {% if url_name == 'CTN' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CTN' %}">Cây cảnh trong nhà</a>
+                            </li>
+                            
+                            <li class = "kind-of-product {% if url_name == 'CDB' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CDB' %}">Cây cảnh để bàn</a>
+                            </li>
+                            
+                            <li class = "kind-of-product {% if url_name == 'CSD' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CSD' %}">Cây sen đá</a>
+                            </li>
+                            
+                            <li class = "kind-of-product {% if url_name == 'CTS' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CTS' %}">Cây thủy sinh</a>
+                            </li>
+                            
+                            <li class = "kind-of-product {% if url_name == 'CCT' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CCT' %}">Cây công trình</a>
+                            </li>
+
+                            <li class = "kind-of-product {% if url_name == 'CNN' %}active{% endif %}">
+                                <a class="kind-of-product-link" href="{% url 'CNN' %}">Cây nông nghiệp</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item-main {% if url_name == 'introduction' %}active{% endif %}">
+                    <a class="navbar-link" href="{% url 'introduction' %}">Giới thiệu</a>
+                </li>
+                <li class="nav-item-main item-users tree-care">
+                    <a class="navbar-link" href="{% url 'home' %}">
+                        Cách Chăm Sóc
+                    </a>
+                    <i class="fa-solid fa-ellipsis-vertical ellipsis-icon"></i>
+                    <div class="buffer-tree-care"></div>
+                    <ul class="list-tree-care">
+                        <li class = "kind-tree-care {% if url_name == 'careCVP' %}active{% endif %}">
+                            <a class = "kind-tree-care-link" href = "{% url 'careCVP'%}">Cây văn phòng</a>
+                        </li>
+                        <li class = "kind-tree-care {% if url_name == 'careCTS' %}active{% endif %}">
+                            <a class = "kind-tree-care-link" href = "{% url 'careCTS'%}">Cây thủy sinh</a>
+                        </li>
+                        <li class = "kind-tree-care {% if url_name == 'careSD' %}active{% endif %}">
+                            <a class = "kind-tree-care-link" href = "{% url 'careSD'%}">Sen đá</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item-main item-users {% if url_name == 'news' %}active{% endif %}">
+                    <a class="navbar-link" href="{% url 'news' %}">Tin Tức</a>
+                </li>
+                <li class="nav-item-main item-users {% if url_name == 'connection' %}active{% endif %}">
+                    <a class="navbar-link" href="{% url 'connection' %}">Liên Hệ</a>
+                </li>
+                <li class="nav-item-main item-users {% if url_name == 'policy' %}active{% endif %}">
+                    <a class="navbar-link" href="{% url 'policy' %}">Chính Sách</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endwith %}
+    {% endblock %}
+
+    {% block sologan %}
+    <div class = "sologan">
+        <p>Hãy chung tay vì một cộng đồng xanh<i class="fa-solid fa-heart heart-icon"></i></p>    
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    <div class = "container-fluid goods-container">
+        <div class = "row m-5">
+            <h3 class = "title-list-good"> {% block title %} Danh sách cây trồng {% endblock %}</h3>
+        </div>
+        <div class = "row m-5">
+            {% for product in page_obj  %}
+                <div class="product-card col-4">
+                    <img src="{% static 'images/' %}{{ product.image }}" alt="{{ product.name }}">
+                    <h2>{{ product.plant_name }}</h2>
+                    <p>{{ product.description }}</p>
+                    <span class="price">{{ product.price }}Đ</span>
+                    <div class = "buy-actions">
+                        <button type = "submit" class = "add shopping-cart-button" data-cart-item-id="{{ product.id }}"><i class="fa-solid fa-cart-shopping shopping-icon"></i></button>
+                        <button type = "submit" class = "purchase btn-new" data-cart-item-id="{{ product.id }}">Mua Ngay</button>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                </div><div class="row m-5">  <!-- Mở một row mới khi đã có 3 sản phẩm -->
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block addToCartDisplay %}
+    <div class = "container-fluid add-to-cart-display hidden" id = "add-to-cart-display">
+        <div class = "row m-5">
+            <div class="product-cart-add col-12">
+                <div class = "product-information col-6">
+                    <img src="{% static 'images/cau-tieu-tram.jpg' %}" alt="" id = "product-cart-img">
+                    <h2 id = "product-cart-name">Ten san pham</h2>
+                </div>
+                <div class="cart-informations">
+                    <div class = "icon add-to-cart-cancel"> <i class="fa-solid fa-xmark icon"></i> </div>
+                    <label for = "cart-quantity">Số Lượng:</label>
+                    <input type = "number" class="cart-quantity" id="cart-quantity"style = "width:75px;font-size:1.3rem" min ="1" value = "1">
+                    
+                    <div class="cart-price" id = "cart-price">
+                        <label for = "cart-price-content">Giá:</label><span id ="cart-price-content" >VNĐ</span>
+                    </div>
+                    
+                    <div class = "buy-actions">
+                        <button type = "submit" class = " add_complete shopping-cart-submit btn-new" data-cart-item-id="">Thêm</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {%block paymentDisplay %}
+    <div class = "container-fluid payment-display hidden" id = "payment-display">
+        <div class = "row m-5">
+            <div class="product-payment col-12">
+                <h1> Đơn Hàng Của Bạn </h1>
+                
+                <div class = "product-information col-6">
+                    <img src="{% static 'images/cau-tieu-tram.jpg' %}" alt="" id = "product-payment-img">
+                    <h2 id = "product-payment-name">Ten san pham</h2>
+                </div>
+                <div class="product-informations">
+                    <label for = "payment-quantity">Số Lượng:</label>
+                    <input type = "number" class="payment-quantity" id="payment-quantity"style = "width:75px;font-size:1.3rem" min ="1" value = "1">
+                    
+                    <div class="payment-price" id = "payment-price">
+                        <label for = "payment-price-content">Giá:</label><span id ="payment-price-content" >VNĐ</span>
+                    </div>
+                    
+                    <div class = "buy-actions">
+                        <label for = "total">Tổng: <span id = "total">Total</span></label>
+                        <button type = "submit" class = "payment-submit btn-new">Mua</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endblock%}
+
+
+        <!-- Phân trang -->
+    {%block pagination %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Đầu tiên</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Trước</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Sau</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Cuối cùng &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+    <div class = "footer">
+        <div class="contact">
+            <h4>Liên hệ</h4>
+            <span>SĐT: 090909090909</span>
+            <span>Email: Group13@gmail.com</span>
+            <span>Địa chỉ: Đại Học Nông Lâm TP HCM</span>
+        </div>
+        <div class="group13">
+            <h4>Thành viên</h4>
+            <span>Võ Thành Nhân </span>
+            <span>Nguyễn Nữ Kim Linh</span>
+            <span>Du Thị Bích Ngọc</span>
+            <span>Nguyễn Quỳnh Nhi</span>
+        </div>
+        <div class = "other-platforms">
+            <h4>Theo dõi chúng tôi trên</h4>
+            <a><i class="fa-brands fa-facebook"></i> Facebook</a>
+            <a><i class="fa-brands fa-tiktok"></i> TikTok</a>
+            <a><i class="fa-brands fa-youtube"></i> Youtube</a>
+        </div>
+    </div>
+    {% endblock %}
+
+
+
+    {% block js %}
+    <!-- Bootstrap JS và phụ thuộc -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+            var paymentListUrl = "{% url 'payment_list' %}";
+            var csrfToken = "{{ csrf_token }}";
+            var cartMiniUpdate = "{% url 'cart_mini_update' %}";
+            var payment = "{% url 'payment' %}";
+            var addURL = "{% url 'add' %}";
+        </script>
+        <script  type="text/javascript" src="{% static 'index.js' %}"></script>
+    {% endblock %}
+</body>
+</html>
